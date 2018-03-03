@@ -1,0 +1,39 @@
+{
+  "name": "d3-chord2",
+  "version": "0.0.1",
+  "description": "minor modifications to d3-chord",
+  "keywords": [
+    "d3",
+    "d3-module"
+  ],
+  "license": "MIT",
+  "main": "build/d3-chord2.js",
+  "jsnext:main": "index",
+  "homepage": "https://github.com/mdequeljoe/d3-chord2",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mdequeljoe/d3-chord2.git"
+  },
+  "scripts": {
+    "pretest": "rm -rf build && mkdir build && rollup -g d3-array:d3,d3-path:d3 -f umd -n d3 -o build/d3-chord2.js -- index.js",
+    "test": "tape 'test/**/*-test.js' && eslint index.js src",
+    "prepublish": "npm run test && uglifyjs build/d3-chord2.js -c -m -o build/d3-chord2.min.js",
+    "postpublish": "zip -j build/d3-chord2.zip -- LICENSE README.md build/d3-foo.js build/d3-chord2.min.js"
+  },
+  "dependencies": {
+    "d3-array": "1",
+    "d3-path": "1"
+  },
+  "devDependencies": {
+    "eslint": "^3.19.0",
+    "eslint-config-google": "^0.9.1",
+    "eslint-config-standard": "^11.0.0",
+    "eslint-plugin-import": "^2.9.0",
+    "eslint-plugin-node": "^6.0.1",
+    "eslint-plugin-promise": "^3.6.0",
+    "eslint-plugin-standard": "^3.0.1",
+    "rollup": "0.27",
+    "tape": "^4.9.0",
+    "uglify-js": "2"
+  }
+}

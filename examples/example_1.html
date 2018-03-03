@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<head>
+<meta charset="utf-8">
+<script src="https://d3js.org/d3.v4.min.js"></script>
+<script src="d3-chord2.js"></script>
+<style>
+body { 
+ margin:0; position:fixed; top:0; right:0; bottom:0; left:0; }
+</style>
+</head>
+<body>
+<script>
+  
+var m1 = [[0,0,0,0,0,0,0,0,0,2.58],[0,0,14.97,0,0.45,0,0.76,0,0,0],[0,14.97,0,0,0,0,0,2.26,0,0],[0,0,0,0,0.08,0,0,0,14.54,0],[0,0.45,0,0.08,0,0,0,0,0,0],[0,0,0,0,0,0,0.69,0,5.11,0],[0,0.76,0,0,0,0.69,0,0,0,1.98],[0,0,2.26,0,0,0,0,0,0,0],[0,0,0,14.54,0,5.11,0,0,0,0],[2.58,0,0,0,0,0,1.98,0,0,0]];
+var sectors = [
+    [0, 1],
+    [2, 3],
+    [4, 5],
+    [6, 7],
+    [8, 9]
+]
+
+var sectors2 = [
+[0, 1],
+[2, 3],
+[4, 5]
+]
+var width = 300,
+  height = 400,
+  outerRadius = Math.min(width, height) * 0.5 - 35,
+  innerRadius = outerRadius - 20;
+
+var svg = d3.select("body").append("svg")
+  	.attr("width", width)
+  	.attr("height", height);
+
+var chord = d3.chord2()
+    .padAngle(0.05)
+    .arcGroups(sectors2)
+    .sortArcGroups(d3.ascending)
+    .sortSubgroups(d3.descending)
+
+var arc = d3.arc()
+    .innerRadius(innerRadius)
+    .outerRadius(outerRadius);
+
+var ribbon = d3.ribbon()
+    .radius(innerRadius)
+  
+var color = d3.scaleOrdinal()
+    .domain(d3.range(2))
+    .range(["steelblue", "#b1b5b7"]);
+
+var g = svg.append("g")
+    .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")")
+    .datum(chord(m1));
+
+var group = g.append("g")
+  .attr("class", "groups")
+  .selectAll("g")
+  .data(function(d) { return d.groups; })
+  .enter().append("g");
+
+group.append("path")
+    .style("fill", function(d) { return color(d.index); })
+    .style("stroke", "black")
+    .attr("opacity", 0.4)
+    .attr("d", arc);
+  
+  g.append("g")
+  .attr("class", "ribbons")
+  .selectAll("path")
+  .data(function(d) {return d; })
+  .enter().append("path")
+  .attr("d", ribbon)
+  .style("opacity", 0.4)
+  .style("fill", 'gray')
+  .style("stroke", "black")
+  .on('mouseover', function(){
+      d3.select(this).style('opacity', 0.9)
+  })
+  .on('mouseout', function(){
+      d3.select(this).style('opacity', 0.4)
+  })
+  group.append('text')
+       .each(function(d) { d.angle = (d.startAngle + d.endAngle) / 2; })
+       .attr("class", "titles")
+       .attr("text-anchor", function(d) { return d.angle > Math.PI ? "end" : null; })
+       .attr("transform", function(d, i) {
+           //fix this
+           return "rotate(" + (d.angle * 180 / Math.PI - 90) + ")"
+           + "translate(" + (innerRadius + 25) + ")"
+           + (d.angle > Math.PI ? "rotate(180)" : "");
+         })
+       .attr('opacity', 1)
+       .style('font-size', '10.5px')
+       .text(function(d) { 
+          // console.log(d)
+         
+           return d.value.toFixed(2)
+         });  
+
+
+ </script>
+</body>
