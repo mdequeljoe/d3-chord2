@@ -20,11 +20,12 @@ var sectors = [
     [8, 9]
 ]
 
-var sectors2 = [
+var s2 = [
 [0, 1],
 [2, 3],
 [4, 5]
 ]
+
 var width = 300,
   height = 400,
   outerRadius = Math.min(width, height) * 0.5 - 35,
@@ -36,7 +37,7 @@ var svg = d3.select("body").append("svg")
 
 var chord = d3.chord2()
     .padAngle(0.05)
-    .arcGroups(sectors2)
+    .arcGroups(s2)
     .sortArcGroups(d3.ascending)
     .sortSubgroups(d3.descending)
 

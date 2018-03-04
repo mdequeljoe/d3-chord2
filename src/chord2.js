@@ -93,18 +93,17 @@ export default function() {
     }
     
     //sort groups replaced by sortArcGroups ?
-    //this needs to be fixed...
     if (sortArcGroups) {
       ag.sort(function(a, b) {                
         return sortArcGroups(arcGroupSums[a], arcGroupSums[b]);
       });
+      //reset groupIndex
       var ags = [];
       ag.forEach(function(i){ags.push(arcGroups[i])})
       groupIndex = [].concat.apply([], ags)
-      var t = range(n);
       for (i = 0; i < n; i++){
-        if (groupIndex.indexOf(t[i]) == -1) {
-          groupIndex.push(i)
+        if (groupIndex.indexOf(arcGroupIndex[i]) == -1) {
+          groupIndex.push(arcGroupIndex[i])
         }
       }        
     }
