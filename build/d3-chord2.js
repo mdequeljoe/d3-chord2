@@ -25,8 +25,6 @@
     function chord2(matrix) {
       
       var n = matrix.length,
-      arcn = arcGroups.length,
-      ag = d3Array.range(arcn),
       tau = Math.PI * 2,
       groupSums = [],
       groupIndex = d3Array.range(n),
@@ -50,11 +48,15 @@
       
       //add in any groups (rows) not specified under arcGroups
       // to arcGroups and arcGroupsIndex
-      arcGroupIndex = [].concat.apply([], arcGroups)
-      for (i = 0; i < groupIndex.length; i++){
-        if (arcGroupIndex.indexOf(groupIndex[i]) == -1) {
-          arcGroupIndex.push(groupIndex[i])
-          arcGroups.push(groupIndex[i])
+      if (arcGroups){
+        var arcn = arcGroups.length,
+        ag = d3Array.range(arcn);
+        arcGroupIndex = [].concat.apply([], arcGroups)
+        for (i = 0; i < groupIndex.length; i++){
+          if (arcGroupIndex.indexOf(groupIndex[i]) == -1) {
+            arcGroupIndex.push(groupIndex[i])
+            arcGroups.push(groupIndex[i])
+          }
         }
       }
       // Compute the sum.
