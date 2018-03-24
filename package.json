@@ -1,7 +1,7 @@
 {
   "name": "d3-chord2",
   "version": "0.0.1",
-  "description": "minor modifications to d3-chord",
+  "description": "fork of d3-chord to provide minor extensions",
   "keywords": [
     "d3",
     "d3-module"
@@ -18,7 +18,7 @@
     "pretest": "rm -rf build && mkdir build && rollup -g d3-array:d3,d3-path:d3 -f umd -n d3 -o build/d3-chord2.js -- index.js",
     "test": "tape 'test/**/*-test.js' && eslint index.js src",
     "prepublish": "npm run test && uglifyjs build/d3-chord2.js -c -m -o build/d3-chord2.min.js",
-    "postpublish": "zip -j build/d3-chord2.zip -- LICENSE README.md build/d3-foo.js build/d3-chord2.min.js"
+    "postpublish": "zip -j build/d3-chord2.zip -- LICENSE README.md build/d3-chord2.min.js"
   },
   "dependencies": {
     "d3-array": "1",

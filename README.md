@@ -1,6 +1,6 @@
 # d3-chord2
 
-d3 plugin to provide minor extensions to [d3-chord](https://github.com/d3/d3-chord) such as grouped arcs
+d3-chord2 forks d3-chord in order to provide minor extensions to [d3-chord](https://github.com/d3/d3-chord) such as grouped arcs and target or source arrows for directionality. 
 
 ## Installing
 ...
@@ -20,7 +20,7 @@ Work in progress and not on npm - and still needs proper testing. Feedback welco
 
 ## API Reference
 
-As the name might suggest, d3-chord2 builds on the API of [d3-chord](https://github.com/d3/d3-chord)
+d3-chord2 builds on the API of [d3-chord](https://github.com/d3/d3-chord)
 
 <a href="#chord2" name="chord2">#</a> d3.<b>chord2</b>() [<>](https://github.com/mdequeljoe/d3-chord2/blob/master/src/chord2.js "Source")
 
@@ -37,4 +37,28 @@ If <i>compare</i> is specified, sets the arc group comparator to the specified f
 <a href="#chord_chordSum" name="#chord_chordSum">#</a> <i>chord2</i>.<b>chordSum</b>([<i>sum</i>]) [<>](https://github.com/mdequeljoe/d3-chord2/blob/master/src/chord2.js#L172 "Source")
 
 If <i>chordSum</i> is specified, scales chord groups according to this sum, rather than the sum of the groups specified in the data <i>matrix</i>. Note that <i>chordSum</i> must be greater than this input matrix sum. 
+
+<a href="#chordArrow" name="chordArrow">#</a> d3.<b>chordArrow</b>() [<>](https://github.com/mdequeljoe/d3-chord2/blob/master/src/chordArrow.js "Source")
+
+Constructs a new chord layout with the default settings. 
+
+<a href="#chordArrow_radius" name="#chordArrow_radius">#</a> <i>chordArrow</i>.<b>radius</b>([<i>radius</i>]) [<>](https://github.com/mdequeljoe/d3-chord2/blob/master/src/chord2.js#L168 "Source")
+
+See [ribbon.radius](https://github.com/d3/d3-chord#ribbon_radius)
+
+<a href="#chordArrow_target" name="#chordArrow_target">#</a> <i>chordArrow</i>.<b>target</b>([<i>compare</i>]) [<>](https://github.com/mdequeljoe/d3-chord2/blob/master/src/chord2.js#L176 "Source")
+
+See [ribbon.target](https://github.com/d3/d3-chord#ribbon_target)
+
+<a href="#chordArrow_targetRadius" name="#chordArrow_targetRadius">#</a> <i>chordArrow</i>.<b>targetRadius</b>([<i>targetRadius</i>]) [<>](https://github.com/mdequeljoe/d3-chord2/blob/master/src/chord2.js#L176 "Source")
+
+to do
+
+<a href="#chordArrow_source" name="#chordArrow_source">#</a> <i>chordArrow</i>.<b>source</b>([<i>source</i>]) [<>](https://github.com/mdequeljoe/d3-chord2/blob/master/src/chord2.js#L172 "Source")
+
+See [ribbon.source](https://github.com/d3/d3-chord#ribbon_source)
+
+<a href="#chordArrow_sourceRadius" name="#chordArrow_sourceRadius">#</a> <i>chordArrow</i>.<b>sourceRadius</b>([<i>sourceRadius</i>]) [<>](https://github.com/mdequeljoe/d3-chord2/blob/master/src/chord2.js#L172 "Source")
+
+to do
 

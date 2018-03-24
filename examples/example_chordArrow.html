@@ -20,12 +20,6 @@ var sectors = [
     [8, 9]
 ]
 
-var s2 = [
-[0, 1],
-[2, 3],
-[4, 5]
-]
-
 var width = 300,
   height = 400,
   outerRadius = Math.min(width, height) * 0.5 - 35,
@@ -37,7 +31,7 @@ var svg = d3.select("body").append("svg")
 
 var chord = d3.chord2()
     .padAngle(0.15)
-    .arcGroups(s2)
+    .arcGroups(sectors)
     .sortArcGroups(d3.ascending)
     .sortSubgroups(d3.descending)
 
@@ -46,7 +40,24 @@ var arc = d3.arc()
     .outerRadius(outerRadius);
 
 var ribbon = d3.ribbon()
+    .radius(innerRadius);
+
+var arrow = d3.chordArrow()
     .radius(innerRadius)
+    .source(function(d){
+      if (d.target.index % 2 == 1) return d.source;
+      if (d.source.index % 2 == 1) return d.target;
+      return 0;
+    
+    })
+    .target(function(d){
+      if (d.target.index % 2 == 1) return d.target;
+      if (d.source.index % 2 == 1) return d.source;
+      return 0;
+    })
+    .sourceRadius(innerRadius - 22)
+    .targetRadius(innerRadius + 15)
+
   
 var color = d3.scaleOrdinal()
     .domain(d3.range(2))
@@ -77,29 +88,16 @@ group.append("path")
   .style("opacity", 0.4)
   .style("fill", 'gray')
   .style("stroke", "black")
-  .on('mouseover', function(){
-      d3.select(this).style('opacity', 0.9)
-  })
-  .on('mouseout', function(){
-      d3.select(this).style('opacity', 0.4)
-  })
-  group.append('text')
-       .each(function(d) { d.angle = (d.startAngle + d.endAngle) / 2; })
-       .attr("class", "titles")
-       .attr("text-anchor", function(d) { return d.angle > Math.PI ? "end" : null; })
-       .attr("transform", function(d, i) {
-           //fix this
-           return "rotate(" + (d.angle * 180 / Math.PI - 90) + ")"
-           + "translate(" + (innerRadius + 25) + ")"
-           + (d.angle > Math.PI ? "rotate(180)" : "");
-         })
-       .attr('opacity', 1)
-       .style('font-size', '10.5px')
-       .text(function(d) { 
-          // console.log(d)
-         
-           return d.value.toFixed(2)
-         });  
+
+  g.append("g")
+  .attr("class", "ribbons")
+  .selectAll("path")
+  .data(function(d) {return d; })
+  .enter().append("path")
+  .attr("d", arrow)
+  .style("opacity", 0.4)
+  .style("fill", 'gray')
+  .style("stroke", "black")
 
 
  </script>
