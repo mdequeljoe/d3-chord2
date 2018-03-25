@@ -1,6 +1,6 @@
 # d3-chord2
 
-d3-chord2 forks d3-chord in order to provide minor extensions to [d3-chord](https://github.com/d3/d3-chord) such as grouped arcs and target or source arrows for directionality. 
+d3-chord2 forks [d3-chord](https://github.com/d3/d3-chord) in a plug-in format in order to provide minor extensions such as grouped arcs and target or source arrows for directionality. Also envisioned to add 'flattened' arcs.
 
 ## Installing
 ...
